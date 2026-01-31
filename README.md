@@ -39,21 +39,15 @@ GHANA_HOUSE_RENT_PROJECT/
 |   ├── house_rentals.csv
 │   ├── cleaned_house_rentals.csv
 │   ├── processed_house_rentals.csv
-│   ├── train_data.csv
-│   └── test_data.csv
-│
+│   
 ├── model/                      # Saved model artifacts (ignored in GitHub)
 │   ├──final_model.pkl
-|   ├──original_encoder.pkl
-|   ├──ridge_model.pkl
-|   ├──scaler.pkl
-|   ├──target_mean_encoder.pkl
 |
 ├── notebooks/
 │   ├── data_cleaning.ipynb
 │   ├── eda_visualization.ipynb
-│   ├── model_training.ipynb
-│   └── model_evaluation.ipynb
+│   ├── preprocessing.ipynb
+│   └── training&evaluation.ipynb
 │
 ├── requirements.txt
 ├── .gitignore
