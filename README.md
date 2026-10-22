@@ -22,10 +22,15 @@ It is designed as a **portfolio-quality project** suitable for:
 
 ## Tech Stack
 
-* **Programming:** Python
-* **Libraries:** pandas, numpy, scikit-learn, matplotlib, seaborn, statmodels
-* **Modeling:** Linear Regression, Ridge Regression, Lasso Regression, Elastic Regression
-* **Tools:** Jupyter Notebook, Git, GitHub
+* **Language:** Python 3.11
+* **Data handling:** pandas, NumPy
+* **Visualization:** Matplotlib, Seaborn
+* **Machine learning:** scikit-learn (pipelines, `ColumnTransformer`, Linear, Ridge, Lasso and ElasticNet regression, `GridSearchCV`)
+* **Encoding:** category_encoders (target encoding), scikit-learn encoders, custom `MultiHotEncoder`
+* **Model persistence:** joblib
+* **Web app:** Streamlit
+* **Development:** Jupyter Notebooks, VS Code
+* **Version control:** Git and GitHub
 
 
 ##  Project Structure

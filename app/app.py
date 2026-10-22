@@ -2,6 +2,7 @@ import warnings
 import streamlit as st
 import pandas as pd
 import joblib
+import json
 
 # Suppress scikit-learn version warnings
 # -----------------------------
@@ -28,30 +29,15 @@ st.set_page_config(
 st.title("🏠 Ghana House Rent Prediction App")
 st.write("Enter property details below to estimate monthly rent in Ghana")
 
-# ----------------------------
-# ALL amenities (MUST match training)
-# ----------------------------
-ALL_AMENITIES = [
-    "Air Conditioning",
-    "Wi-Fi",
-    "Balcony",
-    "Microwave",
-    "Refrigerator",
-    "TV",
-    "Wardrobe",
-    "Chandelier",
-    "Dining Area",
-    "24-Hour Electricity",
-    "Apartment",
-    "Dishwasher",
-    "Hot Water",
-    "Kitchen Cabinets",
-    "Kitchen Shelf",
-    "Pop Ceiling",
-    "Pre-Paid Meter",
-    "Tiled Floor"
-]
 
+with open(r"C:\Users\name\Desktop\BIG FOLDER\PROJECTS\My_Projects\ghana_house_rent_project\model\localities.json") as f:
+    LOCALITIES = json.load(f)
+
+pre = model.named_steps['preprocessor']
+
+# Amenities options, taken from the trained encoder
+multihot = pre.named_transformers_['multihot']
+ALL_AMENITIES = list(multihot.mlb.classes_)
 
 # ----------------------------
 # User inputs
@@ -62,7 +48,6 @@ floor_area = st.slider("Floor Area (sqm)", min_value=0, max_value=1400, value=50
 
 condition = st.selectbox("Condition", ["New", "Renovated", "Used"])
 is_furnished = st.selectbox("Furnishing Status", ["Unfurnished", "Semi-Furnished", "Furnished"])
-parking_space = st.checkbox("Parking Space Available")
 
 category = st.selectbox(
     "Property Category",
@@ -83,13 +68,9 @@ region = st.selectbox(
     ]
 )
 
-locality = st.text_input("Locality (e.g., East Legon, Spintex)")
+locality = st.selectbox("Locality", LOCALITIES)
 
-amenities_selected = st.multiselect(
-    "Amenities",
-    options=ALL_AMENITIES,
-    default=[]
-)
+amenities_selected = st.multiselect("Amenities", ALL_AMENITIES)
 
 # -----------------------------
 # Prepare input for pipeline
@@ -104,8 +85,7 @@ input_data = pd.DataFrame({
     "locality": [locality],
     "region": [region],
     "category": [category],
-    "parking_space": [parking_space],
-    "amenities": [[amenities_selected]]  # list of selected amenities
+    "amenities": [amenities_selected] # list of selected amenities
 })
 
 
@@ -116,4 +96,5 @@ input_data = pd.DataFrame({
 if st.button("Predict Rent"):
     prediction = model.predict(input_data)[0]
     st.success(f"💰 Estimated Monthly Rent: GHS {prediction:,.2f}")
+
 
