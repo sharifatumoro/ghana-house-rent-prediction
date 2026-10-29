@@ -29,10 +29,6 @@ st.set_page_config(
 st.title("🏠 Ghana House Rent Prediction App")
 st.write("Enter property details below to estimate monthly rent in Ghana")
 
-
-with open(r"C:\Users\name\Desktop\BIG FOLDER\PROJECTS\My_Projects\ghana_house_rent_project\model\localities.json") as f:
-    LOCALITIES = json.load(f)
-
 pre = model.named_steps['preprocessor']
 
 # Amenities options, taken from the trained encoder
@@ -54,21 +50,12 @@ category = st.selectbox(
     ["Flats", "Detached", "Townhouse", "Duplex", "Mansion", "Semi-Detached"]
 )
 
-region = st.selectbox(
-    "Region",
-    [
-        "Greater Accra",
-        "Ashanti",
-        "Eastern Region",
-        "Central Region",
-        "Northern Region",
-        "Western Region",
-        "Brong Ahafo",
-        "Volta Region"
-    ]
-)
+with open(r"C:\Users\name\Desktop\ghana-house-rent-prediction\data\localities.json", encoding="utf-8") as f:
+    LOCALITIES = json.load(f)   # now a dict: {region: [localities]}
 
-locality = st.selectbox("Locality", LOCALITIES)
+region = st.selectbox("Region", sorted(LOCALITIES.keys()))
+locality = st.selectbox("Locality", LOCALITIES[region])
+
 
 amenities_selected = st.multiselect("Amenities", ALL_AMENITIES)
 
@@ -87,7 +74,6 @@ input_data = pd.DataFrame({
     "category": [category],
     "amenities": [amenities_selected] # list of selected amenities
 })
-
 
 
 # -----------------------------
