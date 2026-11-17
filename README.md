@@ -26,7 +26,7 @@ It is designed as a **portfolio-quality project** suitable for:
 * **Data handling:** pandas, NumPy
 * **Visualization:** Matplotlib, Seaborn
 * **Machine learning:** scikit-learn (pipelines, `ColumnTransformer`, Linear, Ridge, Lasso and ElasticNet regression, `GridSearchCV`)
-* **Encoding:** category_encoders (target encoding), scikit-learn encoders, custom `MultiHotEncoder`
+* **Encoding:** scikit-learn encoders
 * **Model persistence:** joblib
 * **Web app:** Streamlit
 * **Development:** Jupyter Notebooks, VS Code
@@ -44,6 +44,7 @@ GHANA_HOUSE_RENT_PROJECT/
 |   ├── house_rentals.csv
 │   ├── cleaned_house_rentals.csv
 │   ├── processed_house_rentals.csv
+│   ├── localities.json
 │   
 ├── model/                      # Saved model artifacts (ignored in GitHub)
 │   ├──final_model.pkl
@@ -71,8 +72,8 @@ GHANA_HOUSE_RENT_PROJECT/
 
 ## Results & Insights
 
-* Ridge Regression improved generalization and reduced overfitting
-* Amenities, locality and bedrooms were the strongest predictors of rent
+* Linear Regression emerged as the best-performing model, indicating that regularization did not significantly improve model performance.
+* Locality emerged as the strongest predictor of rent
 * The final model achieved stable and interpretable performance
 
 
@@ -91,7 +92,7 @@ python app/app.py
 
 **Sharifatu Moro**
 Aspiring Data Scientist & Machine Learning Engineer
-Background: Economics & Applied Data Analysis
+Background: Economics 
 
 
 ## GitHub Topics

@@ -6,4 +6,5 @@ matplotlib
 seaborn
 statsmodels
 joblib
-category_encoders
+itertools
+re
